@@ -1,14 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getArticles } from "./api";
+import { getArticlesById } from "./api";
 import ArticleCard from "./ArticleCard";
-export default function IndividualArticle() {
-    return(
-        <div>
-        <h2>One Article</h2>
 
-    </div>
-    )
-    
+export default function IndividualArticle() {
+    const [singleArticles, setSingleArticles] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const { article_id } = useParams();
+    useEffect(() => {
+        getArticlesById(article_id).then((res) => {
+            setSingleArticles(res);
+            setIsLoading(false)
+        });
+    }, []);
+
 
 }
