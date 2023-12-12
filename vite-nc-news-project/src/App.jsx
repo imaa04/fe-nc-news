@@ -5,6 +5,7 @@ import './App.css'
 import Header from './Header'
 import ArticleList from './ArticleList';
 import IndividualArticle from './IndividualArticle';
+import CommentsList from './CommentsList';
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/articles" element={<ArticleList />} />
         <Route path={`/articles/:article_id`} element={<IndividualArticle/>} />
+        <Route path={`/articles/:article_id/comments`} element={<CommentsList />} />
       </Routes>
     </>
   )

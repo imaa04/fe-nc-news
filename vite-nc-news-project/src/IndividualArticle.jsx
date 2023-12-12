@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getArticlesById } from "./api";
+import CommentsList from "./CommentsList";
 
 export default function IndividualArticle() {
     const [article, setSingleArticle] = useState([])
@@ -9,7 +10,6 @@ export default function IndividualArticle() {
     useEffect(() => {
         getArticlesById(article_id)
         .then((res) => {
-            console.log(res)
             setSingleArticle(res)
             setIsLoading(false)
         })
@@ -25,9 +25,11 @@ export default function IndividualArticle() {
             <p>Posted on {new Date(article.created_at).toLocaleDateString()}</p>
             {article.article_img_url && <img src={article.article_img_url} alt={article.title} />}
             <p>{article.body}</p>
-            <p>Posted By {article.author}</p>
+            <p>Written By {article.author}</p>
             <p>Ratings ({article.votes})</p>
-            <p>Comments ({article.comment_count})</p>
+            <p>({article.comment_count})</p>
+            <CommentsList article_id={article_id}/>
         </div>
+        
     )
 }

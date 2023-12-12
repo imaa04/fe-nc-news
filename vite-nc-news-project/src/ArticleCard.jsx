@@ -3,7 +3,7 @@ export default function ArticleCard({articles}) {
     return (
         <ul>
             {articles.map((article) => (
-                <div key={article.article_id} className="event-container">
+                <div key={article.article_id} className="article-container">
                     <Link to={`/articles/${article.article_id}`} ><h3>{article.title}</h3></Link>
                     <li>Topic: {article.topic}</li>
                     <li>Posted by {article.author}</li>
