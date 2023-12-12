@@ -13,7 +13,6 @@ export function getArticles() {
 
 export function getArticlesById(article_id) {
     return ncNewsAPI.get(`/articles/${article_id}`).then((res) => {
-        const { articles } = res.data
-        return articles;
+         return res.data.article
     });
 }
