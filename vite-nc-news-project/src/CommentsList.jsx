@@ -4,12 +4,17 @@ import moment from 'moment';
 
 export default function CommentsList({article_id}) {
     const [comments, setComments] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         getCommentsById(article_id)
         .then((res) =>{
             setComments(res)
+            setIsLoading(false)
         })
     },[])
+    if (isLoading) {
+        return <h2>Loading...</h2>
+    }
     return (
         <div className='comment-section'>
             <h2>Comments ({comments.length})</h2>
