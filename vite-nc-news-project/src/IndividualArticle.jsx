@@ -32,5 +32,6 @@ export default function IndividualArticle() {
             <CommentsList article_id={article_id}/>
         </div>
         
+        
     )
 }
