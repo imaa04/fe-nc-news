@@ -4,6 +4,8 @@ import { getArticlesById } from "./api";
 import CommentsList from "./CommentsList";
 import UpVote from "./UpVote";
 
+
+
 export default function IndividualArticle() {
     const [article, setSingleArticle] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -28,10 +30,9 @@ export default function IndividualArticle() {
             <p>{article.body}</p>
             <p>Written By {article.author}</p>
             <UpVote currVotes= {article.votes}/>
+            <p>Ratings ({article.votes})</p>
             <p>({article.comment_count})</p>
             <CommentsList article_id={article_id}/>
         </div>
-        
-        
     )
 }

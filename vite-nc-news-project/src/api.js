@@ -21,6 +21,7 @@ export function getCommentsById(article_id) {
     return ncNewsAPI.get(`/articles/${article_id}/comments`).then((res) => {
         return res.data.comments
     });
+
 }
 
 export function patchVotes(article_id, voteChange) {
