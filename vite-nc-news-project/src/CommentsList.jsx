@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { getCommentsById } from "./api";
 import moment from 'moment';
+import CommentAdder from "./CommentAdder";
 
 export default function CommentsList({article_id}) {
+
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         getCommentsById(article_id)
         .then((res) =>{
@@ -12,12 +15,15 @@ export default function CommentsList({article_id}) {
             setIsLoading(false)
         })
     },[])
+
     if (isLoading) {
         return <h2>Loading...</h2>
     }
+    
     return (
         <div className='comment-section'>
             <h2>Comments ({comments.length})</h2>
+            <CommentAdder article_id={article_id} setComments={setComments}/>
             {comments.map((comment) => (
                 <div key={comment.comment_id} className="comment-container">
                     

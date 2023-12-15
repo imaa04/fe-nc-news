@@ -1,4 +1,6 @@
 import axios from "axios";
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 
 const ncNewsAPI = axios.create({
     baseURL: "https://api-ima-nc-news.onrender.com/api",
@@ -30,5 +32,26 @@ export function patchVotes(article_id, voteChange) {
     }
     return ncNewsAPI.patch(`articles/${article_id}`, patchBody).then((res) => {
         return res.data.article.votes
+    })
+}
+
+export function getUsers() {
+    return ncNewsAPI.get(`/users`).then((res) => {
+        const { users } = res.data
+        return users;
+    });
+}
+
+export function postComment(article_id, newCommentText, username) {
+    // const { user } = useContext(UserContext)
+    const postBody={
+        username: username,
+        body: newCommentText
+    }
+    const url = `/articles/${article_id}/comments`
+    console.log(url);
+    return ncNewsAPI.post(url, postBody).then((res) => {
+        
+        return res.data.comment
     })
 }
