@@ -6,8 +6,10 @@ import { useUser } from "./UserContext";
  function CommentAdder({article_id,setComments}){
     const { user } = useUser()
     const [newComment, setNewComment] = useState('');
+     const [isAdding, setIsAdding] = useState(false)
 
     const handleSubmit = (e) => {
+        setIsAdding(true)
         e.preventDefault();
         setNewComment('')
         postComment(article_id ,newComment, user.username)
@@ -15,6 +17,9 @@ import { useUser } from "./UserContext";
             setComments((currComments) => {
                 return [newCommentFromApi, ...currComments]
             })
+        })
+        .finally(() => {
+            setIsAdding(false)
         })
     }
 
@@ -29,7 +34,7 @@ import { useUser } from "./UserContext";
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             ></textarea>
-            <button className="comment-send-button">Add</button>
+            <button className="comment-send-button">{isAdding ? 'Adding...' : 'Add'}</button>
         </form>
     )
 }

@@ -49,9 +49,15 @@ export function postComment(article_id, newCommentText, username) {
         body: newCommentText
     }
     const url = `/articles/${article_id}/comments`
-    console.log(url);
     return ncNewsAPI.post(url, postBody).then((res) => {
         
+        return res.data.comment
+    })
+}
+
+export function deleteComment(comment_id) {
+    return ncNewsAPI.delete(`comments/${comment_id}`).then((res) => {
+        console.log(res);
         return res.data.comment
     })
 }

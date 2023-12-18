@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { getCommentsById } from "./api";
 import moment from 'moment';
 import CommentAdder from "./CommentAdder";
-
+import DeleteButton from "./DeleteButton";
+import { useUser } from "./UserContext";
 export default function CommentsList({article_id}) {
 
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const { user } = useUser()
+    const currentUsername = user.username
 
     useEffect(() => {
         getCommentsById(article_id)
@@ -15,6 +18,11 @@ export default function CommentsList({article_id}) {
             setIsLoading(false)
         })
     },[])
+
+    const handleDeleteComments = (commentId) => {
+        const updatedComments = comments.filter(comment => comment.comment_id !== commentId)
+        setComments(updatedComments)
+    }
 
     if (isLoading) {
         return <h2>Loading...</h2>
@@ -31,6 +39,9 @@ export default function CommentsList({article_id}) {
                     <p>Posted {moment.utc(comment.created_at).local().startOf('seconds').fromNow()}</p>
                     <p>{comment.body}</p>
                     <p>UpVote: {comment.votes}</p>
+                    {comment.author === currentUsername && (
+                        <DeleteButton comment_id={comment.comment_id} onDeleteComment={handleDeleteComments}/>
+                    )}
                     
 
                 </div>

@@ -23,12 +23,14 @@ export default function IndividualArticle() {
     }
     return (
         <div key={article.article_id}>
-            <h3>{article.title}</h3>
-            <p>Topic: {article.topic}</p>
+            <p>•{article.topic}•</p>
+            <h2>{article.title}</h2>
+            
             <p>Posted on {new Date(article.created_at).toLocaleDateString()}</p>
             {article.article_img_url && <img src={article.article_img_url} alt={article.title} />}
             <p>{article.body}</p>
             <p>Written By {article.author}</p>
+            
             <UpVote currVotes= {article.votes}/>
             <p>Ratings ({article.votes})</p>
             <p>({article.comment_count})</p>
