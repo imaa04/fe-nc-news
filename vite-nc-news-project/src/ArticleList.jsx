@@ -6,6 +6,7 @@ export default function ArticleList () {
     const [articles, setArticles] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const { article } = useParams();
+    console.log(useParams());
     useEffect(() => {
         getArticles(article).then((res) => {
             setArticles(res);
@@ -18,7 +19,7 @@ export default function ArticleList () {
     }
     return (
         <>
-        <h2>Here is all the articles</h2>
+        <h2>Here is all the trending articles</h2>
         <ArticleCard articles={articles}/>
 
         </>
