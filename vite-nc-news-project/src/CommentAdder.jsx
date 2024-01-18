@@ -27,13 +27,14 @@ import { useUser } from "./UserContext";
         <form className="comment-adder" onSubmit={handleSubmit}>
             {/* <p>{user}</p> */}
             {/* <label htmlFor='newComment'>Add a comment</label> */}
-            <textarea
+            <input
+            
             id='newComment'
             multiline='true'
             placeholder="Add a comment"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            ></textarea>
+            ></input>
             <button className="comment-send-button">{isAdding ? 'Adding...' : 'Add'}</button>
         </form>
     )

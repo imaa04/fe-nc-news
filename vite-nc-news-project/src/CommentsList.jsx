@@ -25,7 +25,13 @@ export default function CommentsList({article_id}) {
     }
 
     if (isLoading) {
-        return <h2>Loading...</h2>
+        return <div class='loader'>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
     }
     
     return (
@@ -34,11 +40,14 @@ export default function CommentsList({article_id}) {
             <CommentAdder article_id={article_id} setComments={setComments}/>
             {comments.map((comment) => (
                 <div key={comment.comment_id} className="comment-container">
+                    <div className="comment-user">
+                        <button className="upvote-comment">♡ {comment.votes}</button>
+                    <p className="comment-author">@{comment.author}</p>
                     
-                    <p>{comment.author}</p>
-                    <p>Posted {moment.utc(comment.created_at).local().startOf('seconds').fromNow()}</p>
-                    <p>{comment.body}</p>
-                    <p>UpVote: {comment.votes}</p>
+                    <p className="comment-date">Posted {moment.utc(comment.created_at).local().startOf('seconds').fromNow()}</p>
+                    </div>
+                    <p className="comment-body">{comment.body}</p>
+                    
                     {comment.author === currentUsername && (
                         <DeleteButton comment_id={comment.comment_id} onDeleteComment={handleDeleteComments}/>
                     )}

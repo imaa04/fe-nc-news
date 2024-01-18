@@ -19,21 +19,32 @@ export default function IndividualArticle() {
     }, []);
  
     if (isLoading) {
-        return <h2>Loading...</h2>
+        return <div class='loader'>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            
+        </div>
     }
     return (
         <div key={article.article_id}>
+            <div className="parallax" style={{ backgroundImage: `url(${article.article_img_url})` , height: "600 px", backgroundAttachment: "fixed", backgroundPosition: "center", backgroundRepeat: 'no-repeat', backgroundSize: 'cover', padding: 0, margin: 0}}>
+            <div className="parallax-container">
             <p>•{article.topic}•</p>
-            <h2>{article.title}</h2>
+                    <h2 style={{ borderTop: '1px solid rgba(225, 225, 225, 225)', paddingTop: '30px',  }}>{article.title}</h2>
             
             <p>Posted on {new Date(article.created_at).toLocaleDateString()}</p>
-            {article.article_img_url && <img src={article.article_img_url} alt={article.title} />}
-            <p>{article.body}</p>
+            {/* {article.article_img_url && <img src={article.article_img_url} alt={article.title} />} */}
             <p>Written By {article.author}</p>
+            </div>
+            </div> 
+            <p style={{ marginLeft: 400, marginRight: 400, marginTop: 50 }}>{article.body}</p>
             
+           
             <UpVote currVotes= {article.votes}/>
-            <p>Ratings ({article.votes})</p>
-            <p>({article.comment_count})</p>
+            
             <CommentsList article_id={article_id}/>
         </div>
     )

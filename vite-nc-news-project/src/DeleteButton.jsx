@@ -19,6 +19,6 @@ export default function DeleteButton({ comment_id, onDeleteComment }){
     }
 
     return (
-        <button onClick={handleDelete} disabled={isDeleting}>{isDeleting ? 'Deleting...' : 'Delete'}</button>
+        <button className='comment-deleteb' onClick={handleDelete} disabled={isDeleting}>{isDeleting ? 'Deleting...' : 'Delete'}</button>
     )
 }
