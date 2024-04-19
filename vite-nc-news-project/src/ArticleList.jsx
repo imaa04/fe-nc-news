@@ -16,7 +16,7 @@ export default function ArticleList () {
     }, []);
 
     if (isLoading) {
-        return <div class='loader'>
+        return <div className='loader'>
             <ul>
                 <li></li>
                 <li></li>

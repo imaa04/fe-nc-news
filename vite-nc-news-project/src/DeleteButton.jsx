@@ -1,21 +1,21 @@
 import { deleteComment } from "./api";
 import { useState } from "react";
 
-export default function DeleteButton({ comment_id, onDeleteComment }){
+export default function DeleteButton({ comment_id, onDeleteComment }) {
 
-    const[isDeleting, setIsDeleting] = useState(false)
-   
+    const [isDeleting, setIsDeleting] = useState(false)
+
 
     const handleDelete = () => {
         setIsDeleting(true)
         deleteComment(comment_id)
-        .then((res) => {
-            console.log(res);
-            onDeleteComment(comment_id)
-        })
-        .finally(()=> {
-            setIsDeleting(false)
-        })
+            .then((res) => {
+                console.log(res);
+                onDeleteComment(comment_id)
+            })
+            .finally(() => {
+                setIsDeleting(false)
+            })
     }
 
     return (
